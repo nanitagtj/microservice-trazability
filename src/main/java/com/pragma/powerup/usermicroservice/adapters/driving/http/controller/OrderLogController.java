@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -44,4 +45,11 @@ public class OrderLogController {
         List<OrderLog> orderLogs = orderLogHandler.getOrderLogsByOrderId(orderId);
         return ResponseEntity.ok(orderLogs);
     }
+    @Operation(summary = "Calculate elapsed time by order ID")
+    @GetMapping("/orderElapsedTime/{orderId}")
+    public ResponseEntity<String> calculateElapsedTimeByOrderId(@PathVariable Long orderId) {
+        String elapsedTime = String.valueOf(orderLogHandler.calculateElapsedTimeByOrderId(orderId));
+        return ResponseEntity.ok(elapsedTime);
+    }
+
 }

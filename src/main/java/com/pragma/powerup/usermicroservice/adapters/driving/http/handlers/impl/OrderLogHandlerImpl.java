@@ -5,6 +5,7 @@ import com.pragma.powerup.usermicroservice.domain.model.OrderLog;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.List;
 
 @Service
@@ -19,6 +20,11 @@ public class OrderLogHandlerImpl implements IOrderLogHandler{
     @Override
     public List<OrderLog> getOrderLogsByOrderId(Long orderId) {
         return orderLogServicePort.getOrderLogsByOrderId(orderId);
+    }
+
+    @Override
+    public Duration calculateElapsedTimeByOrderId(Long orderId) {
+        return orderLogServicePort.calculateElapsedTimeByOrderId(orderId);
     }
 
 }

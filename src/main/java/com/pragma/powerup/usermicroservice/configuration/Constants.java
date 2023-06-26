@@ -6,6 +6,8 @@ public class Constants {
         throw new IllegalStateException("Utility class");
     }
     public static final String RESPONSE_MESSAGE_KEY = "message";
+    public static final String RESPONSE_ERROR_MESSAGE_KEY = "error";
+    public static final String NOT_FOUND_ORDER_LOG_EXCEPTION = "Not found";
     public static final String ORDER_CREATED_MESSAGE = "Order Log saved";
     public static final String SWAGGER_TITLE_MESSAGE = "User API Pragma Power Up";
     public static final String SWAGGER_DESCRIPTION_MESSAGE = "User microservice";

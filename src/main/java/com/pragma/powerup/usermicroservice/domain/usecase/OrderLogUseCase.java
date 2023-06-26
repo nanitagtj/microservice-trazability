@@ -1,9 +1,12 @@
 package com.pragma.powerup.usermicroservice.domain.usecase;
 
 import com.pragma.powerup.usermicroservice.domain.api.IOrderLogServicePort;
+import com.pragma.powerup.usermicroservice.domain.exceptions.NotFoundOrderLogsException;
 import com.pragma.powerup.usermicroservice.domain.model.OrderLog;
 import com.pragma.powerup.usermicroservice.domain.spi.IOrderLogPersistencePort;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.pragma.powerup.usermicroservice.domain.services.Services.deserializeFromJson;
@@ -22,5 +25,16 @@ public class OrderLogUseCase implements IOrderLogServicePort {
     @Override
     public List<OrderLog> getOrderLogsByOrderId(Long orderId){
         return orderLogPersistencePort.getOrderLogsByOrderId(orderId);
+    }
+    public Duration calculateElapsedTimeByOrderId(Long orderId) {
+        List<OrderLog> orderLogs = orderLogPersistencePort.getOrderLogsByOrderId(orderId);
+        if (orderLogs.isEmpty()) {
+            throw new NotFoundOrderLogsException();
+        }
+
+        LocalDateTime startTimestamp = orderLogs.get(0).getTimestamp();
+        LocalDateTime endTimestamp = orderLogs.get(orderLogs.size() - 1).getTimestamp();
+
+        return Duration.between(startTimestamp, endTimestamp);
     }
 }
