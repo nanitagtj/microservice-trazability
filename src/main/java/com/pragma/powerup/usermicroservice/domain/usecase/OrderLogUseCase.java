@@ -26,6 +26,7 @@ public class OrderLogUseCase implements IOrderLogServicePort {
     public List<OrderLog> getOrderLogsByOrderId(Long orderId){
         return orderLogPersistencePort.getOrderLogsByOrderId(orderId);
     }
+    @Override
     public Duration calculateElapsedTimeByOrderId(Long orderId) {
         List<OrderLog> orderLogs = orderLogPersistencePort.getOrderLogsByOrderId(orderId);
         if (orderLogs.isEmpty()) {
